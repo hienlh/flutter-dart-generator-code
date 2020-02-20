@@ -1,5 +1,6 @@
 {
 	"name": "flutter-dart-generator-code",
+	"publisher": "Hieren Lee",
 	"displayName": "Flutter (dart) generator code extension",
 	"description": "Flutter (dart) generator code extension",
 	"version": "0.0.1",
@@ -10,14 +11,14 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.helloWorld"
+		"onCommand:flutter.generateGetterSetter"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "extension.helloWorld",
-				"title": "Hello World"
+				"command": "flutter.generateGetterSetter",
+				"title": "Flutter (dart) generate getter setter"
 			}
 		]
 	},
