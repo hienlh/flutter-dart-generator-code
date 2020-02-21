@@ -1,9 +1,13 @@
 {
-	"name": "flutter-dart-generator-code",
-	"publisher": "Hieren Lee",
-	"displayName": "Flutter (dart) generator code extension",
+	"name": "flutter-dart-generator",
+	"publisher": "HierenLee",
+	"displayName": "Flutter (dart) generator",
 	"description": "Flutter (dart) generator code extension",
-	"version": "0.0.1",
+	"repository": {
+        "type": "git",
+        "url": "https://github.com/hienlh/flutter-dart-generator-code"
+	},
+	"version": "0.0.2",
 	"engines": {
 		"vscode": "^1.42.0"
 	},
