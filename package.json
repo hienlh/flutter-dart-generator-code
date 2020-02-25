@@ -3,11 +3,12 @@
 	"publisher": "HierenLee",
 	"displayName": "Flutter (dart) generator",
 	"description": "Flutter (dart) generator code extension",
+	"icon": "icon.png",
 	"repository": {
         "type": "git",
         "url": "https://github.com/hienlh/flutter-dart-generator-code"
 	},
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"engines": {
 		"vscode": "^1.42.0"
 	},

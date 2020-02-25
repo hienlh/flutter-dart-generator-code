@@ -20,16 +20,18 @@ export function activate(context: vscode.ExtensionContext) {
 
 		const validateMessage = validate();
 
-		const getterSetter = createGetterAndSetter(editor?.document.getText(editor.selection) || '');
+		if (validateMessage === '') {
+			const getterSetter = createGetterAndSetter(editor?.document.getText(editor.selection) || '');
 
 
-		editor?.edit(
-			editBuilder => editor?.selections?.forEach(selection => {
-				editBuilder.insert(selection.end, getterSetter);
-			})
-		);
+			editor?.edit(
+				editBuilder => editor?.selections?.forEach(selection => {
+					editBuilder.insert(selection.end, getterSetter);
+				})
+			);
 
-		await vscode.commands.executeCommand('editor.action.formatDocument');
+			await vscode.commands.executeCommand('editor.action.formatDocument');
+		}
 
 		// Display a message box to the user
 		vscode.window.showInformationMessage(`${validateMessage}`);
@@ -73,7 +75,7 @@ function createGetterAndSetter(text: string): string {
 
 		const propertyName = words.pop() || '';
 		const propertyType = words.pop() || '';
-		
+
 		result += createGetter(propertyName, propertyType).join(' ');
 		result += '\n\n';
 		result += createSetter(propertyName, propertyType).join(' ');
@@ -83,7 +85,7 @@ function createGetterAndSetter(text: string): string {
 	return result;
 }
 
-function createName(propertyName: string, propertyType: string, type: 'Getter' | 'Setter') {
+function createName(propertyName: string, type: 'Getter' | 'Setter') {
 	let newPropertyName = '';
 
 	if (propertyName[0] === '_') {
@@ -98,7 +100,7 @@ function createName(propertyName: string, propertyType: string, type: 'Getter' |
 function createGetter(propertyName: string, propertyType: string): string[] {
 	const words: string[] = [];
 
-	words.push(propertyType, 'get', createName(propertyName, propertyType, 'Getter'), '=>', `${propertyName};`);
+	words.push(propertyType, 'get', createName(propertyName, 'Getter'), '=>', `${propertyName};`);
 
 	return words;
 }
@@ -110,7 +112,7 @@ function createSetter(propertyName: string, propertyType: string): string[] {
 		? propertyName[1].toUpperCase() + propertyName.substr(2, propertyName.length)
 		: propertyName[0].toUpperCase() + propertyName.substr(1, propertyName.length));
 
-	words.push('set', createName(propertyName, propertyType, 'Setter'), `(${propertyType} ${parameterName}) {\n\t${propertyName} = ${parameterName};\n}`);
+	words.push('set', createName(propertyName, 'Setter'), `(${propertyType} ${parameterName}) {\n\t${propertyName} = ${parameterName};\n}`);
 
 	return words;
 }
